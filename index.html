@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peta Role & Workflow Pengembangan Aplikasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#d8fb3a;--on-bg:#111;--paper:#fdfbf0;--ink:#111;--mute:#585b4b;--lime:#d8fb3a;--lav:#bdb6f7;--sky:#a3dcf7;--pink:#f9bcd8;--peach:#ffd793;--mint:#a9efc9;--sh:#111;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a2106;--on-bg:#f0f8c8;--sh:#d8fb3a}}
+:root[data-theme="dark"]{--bg:#1a2106;--on-bg:#f0f8c8;--sh:#d8fb3a}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--on-bg);font-family:Outfit,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;background-image:radial-gradient(rgba(128,128,128,.28) 1px,transparent 1px);background-size:22px 22px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid #7b5cff;outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px 56px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding:12px 0;display:flex;gap:8px;align-items:center;overflow-x:auto}
+nav b{font-weight:800;font-size:1.15rem;margin-right:auto;white-space:nowrap}
+nav a{color:var(--on-bg);text-decoration:none;font-weight:500;border:2px solid var(--on-bg);border-radius:999px;padding:4px 14px;white-space:nowrap}
+nav a:hover{background:var(--on-bg);color:var(--bg)}
+.card{background:var(--paper);color:var(--ink);border:2.5px solid #111;border-radius:24px;box-shadow:6px 6px 0 var(--sh)}
+.btn{background:var(--lime);color:#111;border:2.5px solid #111;border-radius:16px;padding:10px 20px;font-weight:800;box-shadow:3px 3px 0 #111}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #111}
+.btn.alt{background:var(--paper)}
+.dd{width:34px;height:34px;color:var(--on-bg);position:absolute}
+.hero{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:20px;padding:34px;margin-top:10px;overflow:hidden}
+@media (max-width:820px){.hero{grid-template-columns:1fr;padding:24px}}
+.hero .dd{color:#111}
+h1{font-weight:300;font-size:clamp(2.1rem,6.2vw,3.9rem);line-height:1.08;margin:0 0 14px;letter-spacing:-.02em}
+h1 b{font-weight:800;background:linear-gradient(transparent 62%,var(--lime) 62%)}
+.lead{color:var(--mute);max-width:52ch;margin:0 0 20px;font-size:1.05rem}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.stat{border:2.5px solid #111;border-radius:14px;padding:6px 14px;background:#fff;text-align:center;min-width:92px}
+.stat b{display:block;font-size:1.5rem;line-height:1.1}
+.stat span{font-size:.8rem;color:var(--mute)}
+.stack{position:relative;min-height:300px}
+.pk{position:absolute;left:50%;top:14px;width:210px;height:260px;margin-left:-105px;border:2.5px solid #111;border-radius:20px;box-shadow:4px 4px 0 #111;padding:14px;display:flex;flex-direction:column;justify-content:space-between}
+.pk.a{background:var(--lav);transform:rotate(-11deg) translateX(-34px)}
+.pk.b{background:var(--peach);transform:rotate(9deg) translateX(34px)}
+.pk.c{background:var(--sky)}
+.pk big{font-size:4.4rem;font-weight:800;line-height:1;letter-spacing:-.04em}
+.pill{display:inline-block;border:2.5px solid #111;border-radius:12px;background:var(--lime);padding:2px 12px;font-weight:800;color:#111}
+section{margin-top:46px;position:relative}
+h2{font-size:clamp(1.7rem,4.5vw,2.5rem);font-weight:800;letter-spacing:-.02em;margin:0 0 6px}
+.sub{max-width:62ch;margin:0 0 16px}
+.prog{display:flex;align-items:center;gap:12px;margin:14px 0}
+.bar{flex:1;height:18px;border:2.5px solid #111;border-radius:99px;background:var(--paper);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--lime);border-right:2.5px solid #111;width:0;transition:width .3s}
+.phases{display:flex;gap:10px;overflow-x:auto;padding:4px 4px 14px}
+.ph{flex:1 0 150px;text-align:left;background:var(--paper);color:#111;border:2.5px solid #111;border-radius:16px;padding:10px 12px;box-shadow:3px 3px 0 #111}
+.ph small{display:block;color:var(--mute)}
+.ph b{display:block;line-height:1.2}
+.ph[aria-selected="true"]{background:var(--lime);transform:translate(2px,2px);box-shadow:1px 1px 0 #111}
+.stage{display:grid;grid-template-columns:310px 1fr;gap:18px;align-items:start}
+@media (max-width:820px){.stage{grid-template-columns:1fr}}
+.roles{display:flex;flex-direction:column;gap:12px}
+.rl{display:flex;gap:12px;align-items:center;text-align:left;background:var(--paper);color:#111;border:2.5px solid #111;border-radius:18px;padding:10px;box-shadow:4px 4px 0 var(--sh);position:relative}
+.rl[aria-pressed="true"]{background:#fff;outline:3px solid #7b5cff;outline-offset:2px}
+.av{flex:none;width:52px;height:52px;border:2.5px solid #111;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:1.05rem;color:#111}
+.rl b{display:block;line-height:1.2}
+.rl small{color:var(--mute);line-height:1.2;display:block;margin-top:2px}
+.rl .ok{position:absolute;right:8px;top:6px;font-size:.8rem;font-weight:800;color:#0a7a3a}
+.panel{padding:22px}
+.head{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.head .av{width:68px;height:68px;font-size:1.5rem;border-radius:18px}
+.head h3{margin:0;font-size:1.6rem;line-height:1.15}
+.head p{margin:2px 0 0;color:var(--mute)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tb{border:2.5px solid #111;border-radius:12px;background:#fff;padding:5px 14px;font-weight:500;color:#111}
+.tb[aria-selected="true"]{background:var(--lime);font-weight:800}
+.panel ul{margin:0 0 14px;padding-left:20px}.panel li{margin:5px 0}
+.box{border:2.5px solid #111;border-radius:14px;padding:10px 14px;background:var(--mint)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:2.5px solid #111;border-radius:12px;background:#fff;color:#111;padding:3px 12px;font-weight:500}
+button.chip{box-shadow:2px 2px 0 #111}
+button.chip:hover{background:var(--lime)}
+.hand{display:grid;gap:10px}
+.arrow{font-weight:800;font-size:1.4rem;line-height:1}
+.hl{font-size:.9rem;color:var(--mute);margin:8px 0 4px;font-weight:500}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.tl li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;padding:12px 14px;cursor:pointer;background:var(--paper);color:#111;border:2.5px solid #111;border-radius:18px;box-shadow:4px 4px 0 var(--sh)}
+.tl li.cur{background:var(--lime);transform:translate(2px,2px);box-shadow:2px 2px 0 var(--sh)}
+.tl .n{width:44px;height:44px;border:2.5px solid #111;border-radius:50%;display:grid;place-items:center;font-weight:800;background:#fff}
+.tl b{display:block}
+.tl p{margin:2px 0 0}
+.search{width:100%;max-width:420px;border:2.5px solid #111;border-radius:14px;padding:10px 14px;background:var(--paper);color:#111;margin-bottom:16px;box-shadow:3px 3px 0 #111}
+.gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.gl .card{padding:14px 16px;box-shadow:4px 4px 0 var(--sh)}
+.gl b{display:block;font-size:1.1rem}
+.gl p{margin:4px 0 0;color:var(--mute)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:820px){.duo{grid-template-columns:1fr}}
+.duo .card{padding:22px}
+.duo h2{font-size:1.6rem}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opt{border:2.5px solid #111;border-radius:12px;background:#fff;padding:9px 12px;text-align:left;color:#111}
+.opt:hover{background:var(--lime)}
+.opt.good{background:var(--mint)}.opt.bad{background:var(--pink)}
+.fb{margin:12px 0 0;font-weight:800;min-height:1.5em}
+footer{margin-top:46px;text-align:center;font-weight:500}
+@media (prefers-reduced-motion:no-preference){.pk.c{animation:fl 3.5s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-8px)}}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="sp" viewBox="0 0 24 24"><path d="M12 1c1 6 5 10 11 11-6 1-10 5-11 11-1-6-5-10-11-11C7 11 11 7 12 1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="ht" viewBox="0 0 24 24"><path d="M12 21C4 15 2 11 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 3-2 7-10 13z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div class="wrap">
+<nav><b>RoleMap</b><a href="#alur">Role</a><a href="#kasus">Studi kasus</a><a href="#cocok">Cari role-mu</a><a href="#glosarium">Glosarium</a><a href="#kuis">Kuis</a></nav>
+
+<header class="card hero">
+  <svg class="dd" style="left:14px;top:12px"><use href="#sp"/></svg>
+  <svg class="dd" style="right:16px;bottom:14px;width:44px;height:44px"><use href="#ht"/></svg>
+  <div>
+    <h1>Kenali <b>semua role</b>, pahami <b>alur kerja</b> pembuatan aplikasi</h1>
+    <p class="lead">Dari klien menyampaikan masalah sampai aplikasi dipakai publik, ada belasan peran yang saling oper pekerjaan. Jelajahi siapa mengerjakan apa, apa hasilnya, dan ke mana hasil itu diteruskan.</p>
+    <a href="#alur" class="btn" style="text-decoration:none;display:inline-block">Mulai jelajah</a>
+    <div class="stats"><div class="stat"><b>6</b><span>tahap</span></div><div class="stat"><b>15</b><span>role</span></div><div class="stat"><b>1</b><span>siklus berulang</span></div></div>
+  </div>
+  <div class="stack" aria-hidden="true">
+    <div class="pk a"><big>SA</big></div><div class="pk b"><big>PM</big></div>
+    <div class="pk c"><span class="pill">Tahap 1</span><big>BA</big><div><b>Business Analyst</b><br><small>Menggali masalah bisnis</small></div></div>
+  </div>
+</header>
+
+<section id="alur">
+  <h2>Jelajahi role per tahap</h2>
+  <p class="sub">Pilih tahap, lalu pilih role. Setiap role punya empat tab: tugas, serah-terima, alat, dan contoh kasus nyata.</p>
+  <div class="prog"><b id="pt">0/15 role dijelajahi</b><div class="bar"><i id="pb"></i></div></div>
+  <div class="phases" role="tablist" id="phases"></div>
+  <div class="stage"><div class="roles" id="roles"></div><article class="card panel" id="panel" aria-live="polite"></article></div>
+</section>
+
+<section id="kasus">
+  <h2>Studi kasus: satu fitur dari ide sampai evaluasi</h2>
+  <p class="sub">Ikuti fitur Pesan Ulang pada aplikasi pesan-antar NasiGo. Setiap role mengambil bagiannya secara berurutan. Klik langkah mana pun untuk membuka detail role-nya.</p>
+  <p><button class="btn" id="play">Putar cerita</button></p>
+  <ol class="tl" id="tl"></ol>
+</section>
+
+<section id="cocok" class="duo" style="margin-top:46px">
+  <div class="card" id="match"><h2>Role mana yang cocok untukmu?</h2><div id="mbox"></div></div>
+  <div class="card" id="kuis"><h2>Kuis: siapa mengerjakan apa?</h2><div id="qbox"></div></div>
+</section>
+
+<section id="glosarium">
+  <h2>Glosarium istilah</h2>
+  <p class="sub">Istilah yang sering muncul, dijelaskan dengan bahasa sehari-hari.</p>
+  <input class="search" id="gs" type="search" placeholder="Cari istilah, misalnya API" aria-label="Cari istilah">
+  <div class="gl" id="gl"></div>
+</section>
+<footer>Ini model umum. Di tim nyata, satu orang bisa merangkap beberapa role dan tahapnya sering berjalan tumpang tindih.</footer>
+</div>
+
+<script>
+var P=[{n:"Inisiasi & Analisis Kebutuhan",r:["ba","pm","sa"]},{n:"Perancangan & Arsitektur",r:["ux","arch","dbe"]},{n:"Pengembangan (Coding)",r:["be","fe","ai"]},{n:"Pengujian & Keamanan",r:["qa","sec"]},{n:"Dokumentasi & Peluncuran",r:["tw","dev5"]},{n:"Pemeliharaan & Evaluasi",r:["dev6","bapm"]}];
+var CL=["lime","lav","sky","pink","peach","mint"];
+var R={
+ba:{n:"Business Analyst (BA)",a:"BA",s:"Penerjemah kebutuhan bisnis.",t:["Menggali masalah bisnis","Mewawancarai klien dan pemangku kepentingan (stakeholder)","Menyusun dokumen kebutuhan bisnis (BRD)"],from:["Klien / stakeholder"],to:["pm","sa"],out:"Business Requirement Document (BRD)",tools:["Wawancara","User story","Diagram proses bisnis"],ex:"Pemilik NasiGo bilang pelanggan repot memesan ulang menu yang sama. BA mewawancarai lima pelanggan lalu menulis BRD fitur Pesan Ulang."},
+pm:{n:"Product Manager (PM)",a:"PM",s:"Penentu arah dan prioritas produk.",t:["Menyusun roadmap produk","Memilih fitur yang dikerjakan lebih dulu","Menimbang prioritas berdasarkan nilai bisnis"],from:["ba"],to:["sa","ux"],out:"Roadmap dan daftar fitur berprioritas",tools:["Roadmap","Backlog","Metrik produk"],ex:"PM menilai Pesan Ulang bisa menaikkan transaksi berulang, jadi fitur ini masuk roadmap kuartal ini dengan prioritas tinggi."},
+sa:{n:"System Analyst (SA)",a:"SA",s:"Jembatan antara bisnis dan teknis.",t:["Menerjemahkan BRD menjadi spesifikasi teknis","Menyusun Functional Specification Document (FSD)","Merancang alur data sistem"],from:["ba","pm"],to:["ux","arch","dbe"],out:"FSD dan diagram alur data",tools:["UML","Diagram alur data","Spesifikasi API"],ex:"SA menulis aturan: tombol Pesan Ulang muncul di riwayat pesanan, menyalin item dan catatan ke keranjang, lalu mengecek stok."},
+ux:{n:"UI/UX Designer",a:"UX",s:"Perancang pengalaman pengguna.",t:["Membuat wireframe","Merancang alur navigasi pengguna","Membuat prototype interaktif yang siap diuji"],from:["sa","pm"],to:["fe"],out:"Wireframe, alur navigasi, dan prototype",tools:["Figma","Wireframe","Usability testing"],ex:"UX menaruh tombol Pesan Ulang di kartu riwayat pesanan, lalu menguji prototype ke lima calon pengguna."},
+arch:{n:"System / Software Architect",a:"AR",s:"Perancang fondasi teknis.",t:["Menentukan arsitektur teknis","Memilih bahasa pemrograman dan framework","Menyusun struktur server agar kuat menampung banyak pengguna"],from:["sa"],to:["be","dev5"],out:"Dokumen arsitektur dan pilihan teknologi",tools:["Diagram arsitektur","Cloud","Pola microservice"],ex:"Arsitek memutuskan fitur memakai layanan pesanan yang sudah ada, plus cache riwayat agar tetap cepat saat jam makan siang."},
+dbe:{n:"Database Engineer",a:"DB",s:"Perancang penyimpanan data.",t:["Merancang skema tabel","Menentukan relasi antar data","Menyusun struktur penyimpanan database"],from:["sa","arch"],to:["be"],out:"Skema database dan relasi antar tabel",tools:["SQL","ERD","Indexing"],ex:"Database engineer menghubungkan riwayat pesanan ke item menu dan menambah indeks supaya pencarian riwayat cepat."},
+be:{n:"Back-End Developer",a:"BE",s:"Pembangun logika di sisi server.",t:["Membangun logika aplikasi di server","Mengelola transaksi database","Membuat API untuk menghubungkan data"],from:["arch","dbe","sa"],to:["fe","qa"],out:"API dan layanan server",tools:["Bahasa server (Java, Go, PHP, Node.js)","REST API","Git"],ex:"Back-end membuat endpoint reorder yang menyalin item pesanan lama ke keranjang dan memvalidasi stok."},
+fe:{n:"Front-End & Mobile Developer",a:"FE",s:"Pengubah desain menjadi tampilan yang hidup.",t:["Menerjemahkan desain UI/UX menjadi kode","Membangun antarmuka web atau aplikasi ponsel","Menyambungkan tampilan ke API Back-End"],from:["ux","be"],to:["qa"],out:"Antarmuka web dan aplikasi mobile yang berfungsi",tools:["HTML/CSS/JavaScript","React atau Flutter","Git"],ex:"Front-end membuat tombol Pesan Ulang di aplikasi Android dan iOS lalu menyambungkannya ke endpoint tadi."},
+ai:{n:"AI / Data Engineer",a:"AI",s:"Pengolah data besar dan fitur cerdas (jika diperlukan).",t:["Membangun alur pengolahan data besar","Mengintegrasikan fitur kecerdasan buatan","Menyiapkan data agar bisa dipakai sistem"],from:["sa","be"],to:["be","qa"],out:"Pipeline data atau model AI yang terintegrasi",tools:["Python","ETL","Machine learning"],ex:"AI engineer menambah saran menu “Mau pesan lagi?” berdasarkan pola pesanan pengguna."},
+qa:{n:"Quality Assurance (QA) / Tester",a:"QA",s:"Penjaga kesesuaian dan kualitas.",t:["Menjalankan skenario pengujian (test case)","Memastikan fitur sesuai dokumen BA","Melaporkan bug dan error untuk diperbaiki"],from:["be","fe","ai","ba"],to:["sec","be","fe"],out:"Laporan hasil uji dan daftar bug",tools:["Test case","Postman","Pengujian otomatis"],ex:"QA menguji kasus menu habis, harga berubah, dan keranjang sudah terisi. Ditemukan bug: harga lama ikut terbawa."},
+sec:{n:"Cybersecurity / AppSec Engineer",a:"SC",s:"Penjaga keamanan sebelum rilis.",t:["Melakukan uji keamanan (penetration testing)","Memindai celah kerentanan pada kode","Memastikan aplikasi aman sebelum dibuka ke publik"],from:["qa","be","fe"],to:["dev5"],out:"Laporan keamanan dan rekomendasi perbaikan",tools:["OWASP Top 10","Pentest","Pemindai kode (SAST/DAST)"],ex:"AppSec memastikan pengguna A tidak bisa memesan ulang pesanan milik pengguna B hanya dengan mengganti ID di alamat."},
+tw:{n:"Technical Writer",a:"TW",s:"Penulis dokumentasi untuk developer dan pengguna.",t:["Menyusun dokumentasi teknis API untuk developer","Menulis panduan operasional sistem","Membuat buku panduan pengguna (user manual)"],from:["be","sa","ux"],to:["dev5"],out:"Dokumentasi API, panduan operasional, dan user manual",tools:["Markdown","OpenAPI / Swagger","Panduan pengguna"],ex:"Technical writer memperbarui dokumen endpoint dan menulis panduan “Cara memesan ulang” untuk pelanggan."},
+dev5:{n:"DevOps / SRE (Peluncuran)",a:"DO",s:"Pembawa aplikasi ke publik.",t:["Menyiapkan server produksi","Mengotomatiskan pengiriman kode (CI/CD)","Merilis sistem agar bisa diakses publik"],from:["arch","sec","tw"],to:["dev6"],out:"Sistem yang aktif di server produksi",tools:["CI/CD","Docker","Server cloud"],ex:"DevOps merilis bertahap: 10% pengguna dulu, lalu semua, dengan opsi rollback cepat bila ada masalah."},
+dev6:{n:"DevOps / SRE (Pemantauan)",a:"SR",s:"Penjaga sistem tetap sehat setelah rilis.",t:["Memantau performa server","Memantau kecepatan akses","Menangani gangguan teknis secara real-time"],from:["dev5"],to:["bapm"],out:"Data pemantauan dan penanganan insiden",tools:["Dashboard monitoring","Log","Peringatan otomatis (alert)"],ex:"SRE melihat waktu respons naik saat jam makan siang, lalu menambah kapasitas server."},
+bapm:{n:"Business Analyst & PM (Evaluasi)",a:"B+P",s:"Pengumpul masukan untuk siklus berikutnya.",t:["Mengumpulkan masukan pengguna setelah rilis","Mengevaluasi hasil terhadap tujuan bisnis","Merencanakan pembaruan fitur untuk siklus berikutnya"],from:["dev6","Pengguna"],to:["ba","pm"],out:"Rencana pembaruan fitur (kembali ke tahap 1)",tools:["Survei pengguna","Analitik","Backlog baru"],ex:"BA dan PM melihat 30% pesanan kini datang dari Pesan Ulang, lalu merencanakan fitur Jadwalkan Pesanan. Siklus mulai lagi."}
+};
+var O=["ba","pm","sa","ux","arch","dbe","be","fe","ai","qa","sec","tw","dev5","dev6","bapm"];
+var G=[["BRD","Dokumen kebutuhan bisnis: apa masalahnya dan apa yang diinginkan bisnis. Ditulis BA."],["FSD","Spesifikasi fungsional: bagaimana sistem harus bekerja secara rinci. Ditulis SA berdasarkan BRD."],["Stakeholder","Pihak yang berkepentingan pada produk: klien, pemilik bisnis, pengguna, atau manajemen."],["Roadmap","Rencana fitur dan urutan pengerjaannya dalam jangka waktu tertentu."],["Backlog","Daftar pekerjaan yang menunggu dikerjakan, diurutkan berdasarkan prioritas."],["Wireframe","Sketsa kerangka tampilan tanpa warna dan gambar, fokus pada letak elemen."],["Prototype","Simulasi aplikasi yang bisa diklik untuk diuji sebelum dikodekan."],["API","Pintu komunikasi antar sistem. Front-end meminta data lewat API, back-end menjawabnya."],["ERD / Skema","Gambar atau rancangan tabel database beserta hubungan antar tabelnya."],["CI/CD","Jalur otomatis yang menguji dan mengirim kode ke server tanpa banyak kerja manual."],["Test case","Skenario uji lengkap dengan langkah dan hasil yang diharapkan."],["Bug","Kesalahan pada program yang membuatnya bekerja tidak sesuai harapan."],["Penetration testing","Uji keamanan dengan meniru serangan nyata untuk menemukan celah."],["SRE","Site Reliability Engineer: menjaga sistem tetap cepat, stabil, dan tersedia."],["Rollback","Mengembalikan sistem ke versi sebelumnya bila rilis baru bermasalah."]];
+var cur="ba",tab=0,vis={},timer=null;
+try{vis=JSON.parse(localStorage.getItem("rw-vis")||"{}")}catch(e){vis={}}
+var $=function(i){return document.getElementById(i)};
+function pof(id){for(var i=0;i<P.length;i++)if(P[i].r.indexOf(id)>-1)return i;return 0}
+function chip(id){return R[id]?'<button class="chip" data-go="'+id+'">'+R[id].n+'</button>':'<span class="chip">'+id+'</span>'}
+function av(id){return '<div class="av" style="background:var(--'+CL[pof(id)]+')">'+R[id].a+'</div>'}
+function mark(){vis[cur]=1;try{localStorage.setItem("rw-vis",JSON.stringify(vis))}catch(e){}}
+function render(){
+  mark();var p=pof(cur),r=R[cur],n=Object.keys(vis).length;
+  $("pt").textContent=n+"/15 role dijelajahi";$("pb").style.width=(n/15*100)+"%";
+  $("phases").innerHTML=P.map(function(x,i){return '<button class="ph" role="tab" aria-selected="'+(i===p)+'" data-ph="'+i+'"><small>Tahap '+(i+1)+'</small><b>'+x.n+'</b></button>'}).join("");
+  $("roles").innerHTML=P[p].r.map(function(id){return '<button class="rl" aria-pressed="'+(id===cur)+'" data-go="'+id+'">'+av(id)+'<span><b>'+R[id].n+'</b><small>'+R[id].s+'</small></span>'+(vis[id]?'<span class="ok">✓ dibuka</span>':'')+'</button>'}).join("");
+  var tb=["Tugas","Serah-terima","Alat & skill","Contoh kasus"],body="";
+  if(tab===0)body='<ul>'+r.t.map(function(x){return '<li>'+x+'</li>'}).join("")+'</ul><div class="hl">Hasil kerja</div><div class="box">'+r.out+'</div>';
+  if(tab===1)body='<div class="hand"><div><div class="hl">Menerima pekerjaan dari</div><div class="chips">'+r.from.map(chip).join("")+'</div></div><div class="arrow">↓</div><div><span class="pill">'+r.n+'</span></div><div class="arrow">↓</div><div><div class="hl">Menyerahkan hasil ke</div><div class="chips">'+r.to.map(chip).join("")+'</div></div></div>';
+  if(tab===2)body='<div class="hl">Hal yang biasa dipakai atau dikuasai</div><div class="chips">'+r.tools.map(function(x){return '<span class="chip">'+x+'</span>'}).join("")+'</div>';
+  if(tab===3)body='<div class="hl">Kasus NasiGo: fitur Pesan Ulang</div><div class="box">'+r.ex+'</div>';
+  $("panel").innerHTML='<div class="head">'+av(cur)+'<div><h3>'+r.n+'</h3><p>Tahap '+(p+1)+': '+P[p].n+'</p></div></div><div class="tabs" role="tablist">'+tb.map(function(x,i){return '<button class="tb" role="tab" aria-selected="'+(i===tab)+'" data-tab="'+i+'">'+x+'</button>'}).join("")+'</div>'+body;
+  $("tl").innerHTML=O.map(function(id,i){return '<li data-story="'+id+'" class="'+(id===cur&&timer?'cur':'')+'"><div class="n">'+(i+1)+'</div><div><b>'+R[id].n+'</b><p>'+R[id].ex+'</p></div></li>'}).join("");
+}
+document.addEventListener("click",function(e){
+  var g=e.target.closest("[data-go]"),p=e.target.closest("[data-ph]"),t=e.target.closest("[data-tab]"),s=e.target.closest("[data-story]");
+  if(g){cur=g.getAttribute("data-go");render();if(g.classList.contains("chip")||g.dataset.m)$("alur").scrollIntoView()}
+  else if(p){cur=P[+p.getAttribute("data-ph")].r[0];render()}
+  else if(t){tab=+t.getAttribute("data-tab");render()}
+  else if(s&&!timer){cur=s.getAttribute("data-story");tab=3;render();$("alur").scrollIntoView()}
+});
+function stop(){clearInterval(timer);timer=null;$("play").textContent="Putar cerita"}
+$("play").onclick=function(){
+  if(timer){stop();render();return}
+  $("play").textContent="Hentikan";cur=O[0];render();
+  timer=setInterval(function(){var i=O.indexOf(cur)+1;if(i>=O.length){stop();render();return}cur=O[i];render();var c=document.querySelector(".tl .cur");if(c)c.scrollIntoView({block:"center"})},3200);
+};
+function gl(){var q=$("gs").value.toLowerCase();var h=G.filter(function(x){return (x[0]+x[1]).toLowerCase().indexOf(q)>-1}).map(function(x){return '<div class="card"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>'}).join("");$("gl").innerHTML=h||'<p>Istilah tidak ditemukan. Coba kata kunci lain.</p>'}
+$("gs").oninput=gl;gl();
+var GR={a:["Analisis & Produk",["ba","pm","sa"]],d:["Desain & Komunikasi",["ux","tw"]],s:["Arsitektur & Data",["arch","dbe","ai"]],k:["Pembangun (Coding)",["be","fe"]],q:["Kualitas & Keamanan",["qa","sec"]],o:["Operasional",["dev5","dev6"]]};
+var MQ=[["Hal yang paling seru buatmu?",[["Memahami masalah orang lain","a"],["Membuat sesuatu tampil rapi dan jelas","d"],["Membangun sesuatu yang benar-benar jalan","k"],["Menemukan sesuatu yang salah","q"]]],["Kamu lebih suka bekerja dengan...",[["Diagram, tabel, dan data","s"],["Server yang harus tetap hidup","o"],["Orang dan rapat diskusi","a"],["Kode dan terminal","k"]]],["Teman bilang kamu...",[["Teliti soal tampilan dan kata-kata","d"],["Cermat dan curiga pada hal yang tampak aman","q"],["Suka memikirkan struktur besar","s"],["Pandai meyakinkan dan menyusun prioritas","a"]]],["Saat ada masalah, kamu...",[["Langsung cek log dan pantau sistem","o"],["Menulis perbaikannya sendiri","k"],["Menyusun skenario untuk mengulang masalahnya","q"],["Mencari akar masalah di rancangan sistem","s"]]]];
+var mi=0,mv={};
+function showM(){
+  if(mi>=MQ.length){var best="a",mx=0;for(var k in mv)if(mv[k]>mx){mx=mv[k];best=k}
+    $("mbox").innerHTML='<p>Kecenderunganmu: <span class="pill">'+GR[best][0]+'</span></p><p>Role yang bisa kamu lirik:</p><div class="chips">'+GR[best][1].map(function(id){return '<button class="chip" data-go="'+id+'" data-m="1">'+R[id].n+'</button>'}).join("")+'</div><p><button class="btn alt" id="mr">Ulangi</button></p>';
+    $("mr").onclick=function(){mi=0;mv={};showM()};return}
+  var q=MQ[mi];$("mbox").innerHTML='<p>Pertanyaan '+(mi+1)+' dari '+MQ.length+'</p><p><b>'+q[0]+'</b></p><div class="opts">'+q[1].map(function(o){return '<button class="opt" data-g="'+o[1]+'">'+o[0]+'</button>'}).join("")+'</div>';
+}
+$("mbox").addEventListener("click",function(e){var b=e.target.closest("[data-g]");if(!b)return;var g=b.getAttribute("data-g");mv[g]=(mv[g]||0)+1;mi++;showM()});
+var Q=[["Siapa yang menyusun BRD setelah mewawancarai klien?","ba"],["Siapa yang mengubah BRD menjadi FSD dan merancang alur data?","sa"],["Siapa yang membuat skema tabel dan relasi antar data?","dbe"],["Siapa yang membuat API di sisi server?","be"],["Siapa yang menjalankan test case agar fitur sesuai BRD?","qa"],["Siapa yang melakukan penetration testing sebelum rilis?","sec"],["Siapa yang menyiapkan CI/CD dan merilis sistem ke publik?","dev5"],["Siapa yang menentukan fitur mana yang dikerjakan lebih dulu?","pm"],["Siapa yang membuat wireframe dan prototype?","ux"],["Siapa yang menulis user manual dan dokumentasi API?","tw"]];
+var qi=0,sc=0,lk=false;
+function sh(a){return a.slice().sort(function(){return Math.random()-.5})}
+function showQ(){lk=false;
+  if(qi>=Q.length){$("qbox").innerHTML='<p><b>Skor akhir: '+sc+' dari '+Q.length+'.</b> '+(sc>=8?"Mantap, kamu sudah paham alurnya.":"Coba jelajahi tab Serah-terima lalu ulangi.")+'</p><button class="btn" id="qa">Ulangi kuis</button>';$("qa").onclick=function(){qi=0;sc=0;showQ()};return}
+  var q=Q[qi],w=sh(O.filter(function(x){return x!==q[1]&&x!=="dev6"&&x!=="bapm"})).slice(0,3),o=sh(w.concat(q[1]));
+  $("qbox").innerHTML='<p>Pertanyaan '+(qi+1)+' dari '+Q.length+'</p><p><b>'+q[0]+'</b></p><div class="opts">'+o.map(function(x){return '<button class="opt" data-o="'+x+'">'+R[x].n+'</button>'}).join("")+'</div><p class="fb" id="fb"></p>';
+}
+$("qbox").addEventListener("click",function(e){var b=e.target.closest("[data-o]");if(!b||lk)return;lk=true;
+  var o=b.getAttribute("data-o"),a=Q[qi][1],ok=o===a;if(ok)sc++;b.classList.add(ok?"good":"bad");
+  [].forEach.call(document.querySelectorAll("#qbox .opt"),function(x){if(x.getAttribute("data-o")===a)x.classList.add("good")});
+  $("fb").innerHTML=(ok?"Benar! ":"Belum tepat. ")+'<button class="btn alt" id="nx">Lanjut</button>';$("nx").onclick=function(){qi++;showQ()};
+});
+render();showM();showQ();
+</script>
+</body>
+</html>
